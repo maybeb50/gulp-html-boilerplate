@@ -1,0 +1,24 @@
+@charset 'UTF-8';
+
+// Web font 
+@import url("http://fonts.googleapis.com/earlyaccess/notosanskr.css");
+@import url("https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700");
+
+// base 
+@import 'base/reset';
+
+// helpers 
+@import 'helpers/var';
+
+// components
+
+// layout
+@import 'layout/layout';
+@import 'layout/forms';
+@import 'layout/header';
+@import 'layout/sidebar';
+@import 'layout/content';
+@import 'layout/tables';
+@import 'layout/modal';
+
+// pages 

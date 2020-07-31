@@ -1,0 +1,112 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$ico-checkbox-rect-name: 'ico-checkbox-rect';
+$ico-checkbox-rect-x: 0px;
+$ico-checkbox-rect-y: 0px;
+$ico-checkbox-rect-offset-x: 0px;
+$ico-checkbox-rect-offset-y: 0px;
+$ico-checkbox-rect-width: 30px;
+$ico-checkbox-rect-height: 60px;
+$ico-checkbox-rect-total-width: 45px;
+$ico-checkbox-rect-total-height: 60px;
+$ico-checkbox-rect-image: '../../static/img/sprite/sprite.png';
+$ico-checkbox-rect: (0px, 0px, 0px, 0px, 30px, 60px, 45px, 60px, '../../static/img/sprite/sprite.png', 'ico-checkbox-rect', );
+$ico-next-type01-name: 'ico-next-type01';
+$ico-next-type01-x: 30px;
+$ico-next-type01-y: 0px;
+$ico-next-type01-offset-x: -30px;
+$ico-next-type01-offset-y: 0px;
+$ico-next-type01-width: 15px;
+$ico-next-type01-height: 24px;
+$ico-next-type01-total-width: 45px;
+$ico-next-type01-total-height: 60px;
+$ico-next-type01-image: '../../static/img/sprite/sprite.png';
+$ico-next-type01: (30px, 0px, -30px, 0px, 15px, 24px, 45px, 60px, '../../static/img/sprite/sprite.png', 'ico-next-type01', );
+$ico-prev-type01-name: 'ico-prev-type01';
+$ico-prev-type01-x: 30px;
+$ico-prev-type01-y: 24px;
+$ico-prev-type01-offset-x: -30px;
+$ico-prev-type01-offset-y: -24px;
+$ico-prev-type01-width: 15px;
+$ico-prev-type01-height: 24px;
+$ico-prev-type01-total-width: 45px;
+$ico-prev-type01-total-height: 60px;
+$ico-prev-type01-image: '../../static/img/sprite/sprite.png';
+$ico-prev-type01: (30px, 24px, -30px, -24px, 15px, 24px, 45px, 60px, '../../static/img/sprite/sprite.png', 'ico-prev-type01', );
+$spritesheet-width: 45px;
+$spritesheet-height: 60px;
+$spritesheet-image: '../../static/img/sprite/sprite.png';
+$spritesheet-sprites: ($ico-checkbox-rect, $ico-next-type01, $ico-prev-type01, );
+$spritesheet: (45px, 60px, '../../static/img/sprite/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
