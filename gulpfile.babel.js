@@ -20,11 +20,11 @@ const fileInclude = require('gulp-file-include'),
 /* Path */
 const path = {
     css: {
-        src: 'public/scss/style.scss',
+        src: 'public/scss/**',
         dest: 'static/css/'
     },
     javascript: {
-        src: 'public/js/*.js',
+        src: 'public/js/**',
         dest: 'static/js'
     },
     imgSprite: {
@@ -58,7 +58,11 @@ function css(cb) {
     
         src(path.css.src, { sourcemaps: true })
             .pipe(plumber({ errorHandler: onError }))
+            // .pipe(gCached('css'))
             .pipe(scss(scssOptions))
+            // .pipe(concat('style.css'))      // 컴파일 된 일반 CSS 
+            // .pipe(autoprefixer())
+            // .pipe(dest('css/'))
             .pipe(minifyCSS())
             .pipe(autoprefixer())
             .pipe(concat('style.min.css'))  // 컴파일 된 압축 CSS 
