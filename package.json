@@ -41,7 +41,7 @@
   "description": "",
   "dependencies": {
     "clean-css": "^4.2.3",
-    "jpeg-js": "^0.4.1",
+    "jpeg-js": "^0.4.4",
     "lodash-template": "^1.0.0",
     "lodash.template": "^4.5.0"
   }
